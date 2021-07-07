@@ -1,0 +1,215 @@
+// @import "~reset-css/sass/reset";
+// created mixin function for mobile and tablet view
+@mixin mobile {
+  @media (max-width : 500px){
+    @content;
+  }
+}
+
+.header {
+
+  position: sticky;
+  top: 10px;
+  z-index: 2;
+  background: black;
+
+  .container {
+    max-width: 600px;
+    background-color: red;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+    .logo {
+      margin: 0 10px;
+      background-color: DarkTurquoise;
+    }
+    .navcontainer{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      @include mobile{
+        display: none;
+      }
+
+
+      .nav-item {
+        margin: 0 5px;
+        background: pink;
+      }
+    }
+  }
+  .item {
+    background-color: cyan;
+  }
+}
+
+
+.introduction{
+
+  &.flex {
+    max-width: 600px;
+    margin: 10px auto;
+    position: relative;
+    .container {
+      background-color: DarkSalmon;
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      @include mobile {
+        flex-direction: column;
+      }
+    }
+    img {
+      border: 1px solid white;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+    .item {
+      margin:10px;
+      display: flex;
+      flex-direction: column;
+      // align-content: center;
+      align-items: center;
+      // justify-content: center;
+      text-align: center;
+      background: rgb(13, 151, 66);
+      flex: 1;
+      // align-self: stretch;
+      button {
+        margin-top: auto;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  &.grid{
+    max-width: 600px;
+    margin: 10px auto;
+    position: relative;
+    .container {
+      background-color: DarkSalmon;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      .item {
+        display:grid;
+        justify-content: center;
+        margin:10px;
+        background: rgb(18, 206, 219);
+      }
+    }
+    img {
+      border: 1px solid white;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+  }
+}
+
+.terminal {
+  height: 600px;
+  width: 600px;
+  // min-width: 600px;
+  margin: 10px auto;
+  position: relative;
+  background-color: #222222;
+  overflow-y: auto;
+  color: white;
+  // padding-left: 10px;
+  .content{
+    margin-left: 10px;
+    // padding-top: 40px;
+    // padding-left: 20px;
+    // padding-right: 20px;
+    // padding-bottom: 100px;
+  }
+  .logs {
+    overflow: auto !important;
+    font-family: "Monaco", monospace;
+    font-size: 12px;
+    margin: 0;
+    white-space: pre;
+    // background-color: #222222;
+    color: #d6d6d6;
+    font-weight: 400;
+    will-change: initial;
+    outline: none;
+  }
+}
+
+.terminalList{
+  height: 600px;
+  width: 600px;
+  margin: 10px auto;
+  position: relative;
+  background-color: #222222;
+  overflow-y: auto;
+  color: white;
+    
+  .content {
+    padding-top: 20px;
+    .group {
+      font-family: "Monaco", monospace;
+      font-size: 12px;
+      margin: 0;
+      // background-color:red;
+      white-space: pre;
+      color: #d6d6d6;
+      font-weight: 400;
+      will-change: initial;
+      outline: none;
+      a {
+        text-decoration: none;
+        display: inline-block;
+        width: 55px;
+        white-space: pre;
+        color: #666666;
+        user-select: none;
+        text-align: right;
+        min-width: 40px;
+        cursor: pointer;
+        padding-right: 1em;
+      }
+      a:hover{
+        color: #1e70bf;
+      }
+    }
+    .content:hover {
+      // color: red;
+    }
+    .group:hover {
+      background-color: #444444;
+    }
+  }
+}
+
+.button{
+  display: flex;
+  width: 600px;
+  margin: 10px auto;
+  top:40px;
+  position: sticky;
+  z-index: 10;
+  background-color: rgba(128, 128, 128, 0.534);
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  button {
+    border-radius: inherit;
+    background-color: #2C2C2C;
+    color: rgb(184, 184, 184);
+    font-size: x-large;
+    height: 100px;
+    width: 100px;
+  }
+  input[type="checkbox"]{
+    height: 100px;
+    width: 200px;
+  }
+}
+
+
+
