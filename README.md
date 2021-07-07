@@ -6,3 +6,4 @@ Created with CodeSandbox
 
 - [ ] Terminal
 - [ ] Auto scroll
+- [x] Flex, grid and bootstrap div
