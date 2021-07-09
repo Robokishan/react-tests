@@ -149,7 +149,7 @@
   overflow-y: auto;
   color: white;
     
-  .content {
+  &.content {
     padding-top: 20px;
     .group {
       font-family: "Monaco", monospace;

@@ -2,30 +2,59 @@ import React, {useState, useRef, useEffect} from 'react'
 import ReactDOM from 'react-dom'
 import './style.scss'
 import axios from 'axios'
+import {FixedSizeList as List} from 'react-window'
+import InfiniteLoader from 'react-window-infinite-loader'
+const LOADING = 1
+const LOADED = 2
+let itemStatusMap = {}
+const isItemLoaded = (index) => !!itemStatusMap[index]
 
 function App() {
+  const loadMoreItems = (startIndex, stopIndex) => {
+    for (let index = startIndex; index <= stopIndex; index++) {
+      itemStatusMap[index] = LOADING
+    }
+    return new Promise((resolve) =>
+      setTimeout(() => {
+        for (let index = startIndex; index <= stopIndex; index++) {
+          itemStatusMap[index] = LOADED
+        }
+        resolve()
+      }, 2500),
+    )
+  }
   const [logs, setLogs] = useState('')
   const [logsList, setLogsList] = useState([])
   const logsRef = useRef(null)
   const logsRefList = useRef(null)
   var [scrollLog, setScrollLog] = useState({scrollLog: true})
-
+  function Row(props) {
+    const {index, style} = props
+    return (
+      <div style={style} className="group" key={`${index}_parent_span`}>
+        <a className="link" key={`${index}_a`}>
+          {index + 1}
+        </a>
+        <span className="cmd" key={`${index}_span`}>
+          {logsList[index]}
+        </span>
+      </div>
+    )
+  }
   function Clear(e) {
     setLogs('')
-    setLogsList([])
+    // setLogsList([])
   }
 
   function scrollToMyRef() {
     /* Scroll to only div and page will stay there */
-    const scroll =
-      logsRefList.current.scrollHeight - logsRefList.current.clientHeight
-    logsRefList.current.scrollTo({
-      top: scroll,
-      behavior: 'smooth',
-    })
-
-    return scroll
-
+    // const scroll =
+    //   logsRefList.current.scrollHeight - logsRefList.current.clientHeight
+    // logsRefList.current.scrollTo({
+    //   top: scroll,
+    //   behavior: 'smooth',
+    // })
+    // return scroll
     /* Scroll to bottom of div */
     // logsRefList.current.scrollIntoView({
     //   block: 'end',
@@ -80,7 +109,7 @@ function App() {
           </div>
         </div>
       </div>
-      <div ref={logsRefList} className="terminalList">
+      {/* <div ref={logsRefList} className="terminalList">
         <div className="content">
           {logsList.map((item, i) => (
             <div className="group" key={`${i}_parent_span`}>
@@ -93,7 +122,41 @@ function App() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
+
+      <InfiniteLoader
+        isItemLoaded={isItemLoaded}
+        itemCount={logsList.length}
+        loadMoreItems={loadMoreItems}
+      >
+        {({onItemsRendered, ref}) => (
+          <List
+            className="terminalList content"
+            height={600}
+            itemCount={logsList.length}
+            itemSize={20}
+            onItemsRendered={onItemsRendered}
+            ref={ref}
+            // width={300}
+          >
+            {Row}
+          </List>
+        )}
+      </InfiniteLoader>
+      {/* <div ref={logsRefList} className="terminalList">
+        <div className="content">
+          {logsList.map((item, i) => (
+            <div className="group" key={`${i}_parent_span`}>
+              <a className="link" key={`${i}_a`}>
+                {i + 1}
+              </a>
+              <span className="cmd" key={`${i}_span`}>
+                {item}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div> */}
       <div className="introduction flex">
         <div className="container">
           <div className="item">
