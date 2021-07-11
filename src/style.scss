@@ -86,18 +86,21 @@
   }
 
   &.grid{
-    max-width: 600px;
+    // max-width: 600px;
     margin: 10px auto;
     position: relative;
     .container {
       background-color: DarkSalmon;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      // grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, 30%);
       .item {
         display:grid;
         justify-content: center;
         margin:10px;
         background: rgb(18, 206, 219);
+        // grid-column: span 1 / auto;
+        grid-area: span 2/ span 1;
       }
     }
     img {
@@ -161,6 +164,9 @@
       font-weight: 400;
       will-change: initial;
       outline: none;
+      &.loading{
+        background-color: grey;
+      }
       a {
         text-decoration: none;
         display: inline-block;

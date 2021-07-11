@@ -20,7 +20,7 @@ function App() {
           itemStatusMap[index] = LOADED
         }
         resolve()
-      }, 2500),
+      }, 1),
     )
   }
   const [logs, setLogs] = useState('')
@@ -43,7 +43,7 @@ function App() {
   }
   function Clear(e) {
     setLogs('')
-    // setLogsList([])
+    setLogsList([])
   }
 
   function scrollToMyRef() {
@@ -169,11 +169,16 @@ function App() {
           </div>
         </div>
       </div>
-
       <div className="introduction grid">
         <div className="container">
           <div className="item">
-            <img src="https://picsum.photos/200/300" alt="Girl in a jacket" />
+            <img src="https://picsum.photos/200/300?random=1" alt="Girl in a jacket" />
+          </div>
+          <div className="item">
+            <img src="https://picsum.photos/200/300?random=2" alt="Girl in a jacket" />
+          </div>
+          <div className="item">
+            <img src="https://picsum.photos/200/300?random=3" alt="Girl in a jacket" />
           </div>
           <div className="item">
             <h1> Grid </h1>
